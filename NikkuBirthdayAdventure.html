@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>The Legend of Nikkuu 🎂</title>
+
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Figtree:wght@400;600&display=swap">
+
+<style>
+:root{
+  --bg:#f4effc;
+  --ink:#35194f;
+  --card:#fff;
+  --pink:#ff4f87;
+  --gold:#f5b82e;
+  --soft:#e4d9f6;
+
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px)
+}
+
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#1b0f2e;
+    --ink:#f4eaff;
+    --card:#2a1942;
+    --soft:#3c2861
+  }
+}
+
+:root[data-theme="dark"]{
+  --bg:#1b0f2e;
+  --ink:#f4eaff;
+  --card:#2a1942;
+  --soft:#3c2861
+}
+
+*{box-sizing:inherit}
+
+html{
+  scroll-padding-top:env(safe-area-inset-top,0px)
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font:400 17px/1.55 Figtree,system-ui,sans-serif;
+  min-height:100vh
+}
+
+main{
+  max-width:460px;
+  margin:0 auto;
+  padding:28px 20px 60px;
+  text-align:center
+}
+
+h1{
+  font:400 clamp(2.3rem,11vw,3.2rem)/1.05 Caprasimo,Georgia,serif;
+  margin:10px 0 14px;
+  color:var(--pink)
+}
+
+p{
+  margin:0 0 16px
+}
+
+.msg{
+  white-space:pre-wrap;
+  background:var(--card);
+  border-radius:18px;
+  padding:18px;
+  text-align:left;
+  border:2px dashed var(--gold)
+}
+
+button{
+  font:600 1rem Figtree,system-ui,sans-serif;
+  border:0;
+  border-radius:999px;
+  padding:13px 26px;
+  background:var(--pink);
+  color:#fff;
+  cursor:pointer
+}
+
+button.alt{
+  background:var(--soft);
+  color:var(--ink)
+}
+
+button:focus-visible{
+  outline:3px solid var(--gold);
+  outline-offset:2px
+}
+
+.hide{
+  display:none!important
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin:18px 0
+}
+
+.tile{
+  aspect-ratio:1;
+  font-size:1.8rem;
+  border-radius:16px;
+  padding:0;
+  background:var(--soft);
+  color:var(--ink);
+  transition:transform .2s
+}
+
+.tile:active{
+  transform:scale(.92)
+}
+
+.tile.open{
+  background:var(--card);
+  cursor:default
+}
+
+.keys{
+  font-size:1.6rem;
+  letter-spacing:6px;
+  min-height:2.2rem
+}
+
+.note{
+  background:var(--card);
+  border-left:6px solid var(--gold);
+  border-radius:12px;
+  padding:14px 16px;
+  text-align:left;
+  margin:14px 0;
+  min-height:3.4rem
+}
+
+#chest{
+  font-size:5rem;
+  display:block;
+  margin:10px auto;
+  background:none;
+  padding:0;
+  animation:bob 1.4s ease-in-out infinite
+}
+
+@keyframes bob{
+  50%{
+    transform:translateY(-8px) rotate(-4deg)
+  }
+}
+
+.fall{
+  position:fixed;
+  top:-40px;
+  font-size:1.6rem;
+  pointer-events:none;
+  animation:fall linear forwards
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(110vh) rotate(360deg)
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  #chest{
+    animation:none
+  }
+
+  .fall{
+    display:none
+  }
+}
+
+.tiny{
+  font-size:.9rem;
+  opacity:.75
+}
+
+.foot{
+  margin-top:34px
+}
+
+.lore{
+  font-style:italic;
+  opacity:.85;
+  margin-bottom:20px
+}
+</style>
+</head>
+
+<body>
+
+<main>
+
+<!-- ===================== -->
+<!-- OPENING -->
+<!-- ===================== -->
+
+<section id="s1">
+
+  <div style="font-size:3rem">🎂</div>
+
+  <h1>Happy Birthday, Nikkuu! 💖</h1>
+
+  <p class="msg">
+Ahem… ahem…
+Okay, birthday girl. 💗
+I could’ve just given you your birthday surprise like a normal person…
+But where’s the fun in that? 😌
+So, I’ve hidden your surprise somewhere in this little adventure I made just for you.
+Your mission is simple:
+Find the THREE keys hidden throughout the world below. 🗝️
+Once you find them all, you’ll finally get to see what I’ve been hiding for you.
+I hope you have as much fun finding it as I had making this for you.
+
+Good luck, Nikkuu. ❤️
+And happy birthday to my favourite person. ✨
+  </p>
+
+  <p>
+    There’s a surprise waiting for <b>Nikkuu</b>...
+    but only if she can find all three keys that
+    <b>Debucakke the Extremely Evil</b> has hidden from her. 😈
+  </p>
+
+  <button id="start">
+    Begin the Quest 🗺️
+  </button>
+
+</section>
+
+
+<!-- ===================== -->
+<!-- KEY HUNT -->
+<!-- ===================== -->
+
+<section id="s2" class="hide">
+
+  <h1>Find the Keys 🗝️</h1>
+
+  <p class="lore">
+    Three keys were scattered across the ancient kingdom...
+    and only the chosen one may recover them.
+  </p>
+
+  <div class="keys" id="keys" aria-live="polite">
+    ▫️▫️▫️
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="note" id="note">
+    The ancient map is unclear...
+
+    Tap a square and dig carefully. 🔎
+  </div>
+
+  <button id="chestBtn" class="hide">
+    🏆 Approach the Ancient Chest
+  </button>
+
+</section>
+
+
+<!-- ===================== -->
+<!-- CHEST -->
+<!-- ===================== -->
+
+<section id="s3" class="hide">
+
+  <p class="lore">
+    The three keys have been recovered...
+
+    The ancient chest has been waiting for centuries.
+
+    Proceed carefully, my love.
+  </p>
+
+  <button id="chest"
+          aria-label="Carefully open the ancient chest">
+    🎁
+  </button>
+
+  <p class="tiny" id="tap">
+    Tap the chest to discover its ancient secret...
+  </p>
+
+  <div id="final" class="hide">
+
+    <h1>Happy Birthday, Nikkuu 💖</h1>
+
+    <p class="msg" id="finalMsg">
+You make my life brighter, funnier and a lot more fun.
+
+I'm so grateful for every moment with you, and I can't wait for all the adventures still ahead.
+
+I love you, today and always.
+    </p>
+
+    <p id="sign"
+       style="margin-top:18px;font-weight:600">
+      Forever yours, Debucakke 💖
+    </p>
+
+    <button class="alt" id="again">
+      🔄 Play Again
+    </button>
+
+  </div>
+
+</section>
+
+
+<div class="foot">
+  <p class="tiny">
+    Made with questionable amounts of love, mischief and absolutely unnecessary lore. 💖
+  </p>
+</div>
+
+</main>
+
+
+<script>
+
+/* =========================================
+   YOUR PERSONALIZED BIRTHDAY CONTENT
+   ========================================= */
+
+var D = {
+
+  to: "Nikkuu ❤️",
+
+  from: "Debucakke",
+
+  final:
+`You make my life brighter, funnier and a lot more fun.
+I'm so grateful for every moment with you, and I can't wait for all the adventures still ahead.
+Thank you for being such a cuttuu wuutuuu chhootuuu babbyy.
+And despite of all the distance between us I love you more than ever, i take that (EK SAAL SAALE) message seriously hehe
+and I promise I'll do everything possible to close that gap (boosters on straights is what I'll use)
+Happy Birthday, Nikkuu. ❤️
+
+I love you 3000, today and always.`
+
+};
+
+
+/* =========================================
+   TREASURE HUNT CONTENT
+   ========================================= */
+
+var notes = [
+
+  "🗝️ Key 1 discovered!\n\nYour laugh is my favorite sound. Please never stop making me hear it, I love you sooo muchhh. ❤️",
+
+  "🗝️ Key 2 discovered!\n\nThe ancient scrolls have revealed a very important fact...\n\nYou are ridiculously cutuuuu.\n\nThe scrolls do not lie.",
+
+  "🗝️ Key 3 discovered!\n\nThank you for being patient with my terrible (according to you) jokes, questionable decisions and general Debucakke-ness. 😂❤️"
+
+];
+
+
+var EMPTY = [
+  "🍃",
+  "🪨",
+  "🐚",
+  "🌵",
+  "🦋",
+  "🍄",
+  "🐛",
+  "🪙",
+  "🌻"
+];
+
+var found = 0;
+
+
+/* =========================================
+   HELPERS
+   ========================================= */
+
+var $ = function(id){
+  return document.getElementById(id);
+};
+
+
+function show(id){
+
+  ["s1","s2","s3"].forEach(function(section){
+
+    $(section).classList.toggle(
+      "hide",
+      section !== id
+    );
+
+  });
+
+  scrollTo(0,0);
+}
+
+
+/* =========================================
+   START A NEW GAME
+   ========================================= */
+
+function newGame(){
+
+  found = 0;
+
+  $("keys").textContent = "▫️▫️▫️";
+
+  $("note").textContent =
+    "The ancient map is unclear...\n\nTap a square and dig carefully. 🔎";
+
+  $("chestBtn").classList.add("hide");
+
+  $("final").classList.add("hide");
+
+  $("tap").classList.remove("hide");
+
+  $("chest").classList.remove("hide");
+
+
+  /* Pick three random key locations */
+
+  var pos = [];
+
+  while(pos.length < 3){
+
+    var r = Math.floor(Math.random() * 12);
+
+    if(pos.indexOf(r) < 0){
+      pos.push(r);
+    }
+
+  }
+
+
+  var grid = $("grid");
+
+  grid.innerHTML = "";
+
+
+  /* Create treasure tiles */
+
+  for(var i = 0; i < 12; i++){
+
+    (function(i){
+
+      var button =
+        document.createElement("button");
+
+      button.className = "tile";
+
+      button.textContent = "❔";
+
+      button.setAttribute(
+        "aria-label",
+        "Dig here"
+      );
+
+
+      button.onclick = function(){
+
+        if(button.classList.contains("open")){
+          return;
+        }
+
+
+        button.classList.add("open");
+
+
+        var keyIndex = pos.indexOf(i);
+
+
+        /* =========================
+           FOUND A KEY
+           ========================= */
+
+        if(keyIndex >= 0){
+
+          button.textContent = "🗝️";
+
+          found++;
+
+
+          $("note").textContent =
+            notes[found - 1];
+
+
+          $("keys").textContent =
+            "🗝️".repeat(found) +
+            "▫️".repeat(3 - found);
+
+
+          if(found === 3){
+
+            $("note").textContent =
+`Yaaayy !! All THREE keys have been recovered! 🗝️🗝️🗝️
+
+The ancient chest has awakened... Good Job Chhotuu Nikkuu
+
+Open it to find a secret little (like you) message.`;
+
+            $("chestBtn").classList.remove("hide");
+
+          }
+
+        }
+
+
+        /* =========================
+           NOTHING FOUND
+           ========================= */
+
+        else{
+
+          button.textContent =
+            EMPTY[
+              Math.floor(
+                Math.random() * EMPTY.length
+              )
+            ];
+
+          $("note").textContent =
+`Nothing but ${button.textContent}...
+
+The ancient kingdom refuses to cooperate.
+
+Keep digging, my love. 😌`;
+
+        }
+
+      };
+
+
+      grid.appendChild(button);
+
+    })(i);
+
+  }
+
+}
+
+
+/* =========================================
+   CONFETTI
+   ========================================= */
+
+function confetti(){
+
+  var E = [
+    "💖",
+    "🎉",
+    "✨",
+    "🎈",
+    "🌸",
+    "⭐"
+  ];
+
+
+  for(var i = 0; i < 34; i++){
+
+    var s =
+      document.createElement("span");
+
+    s.className = "fall";
+
+    s.textContent =
+      E[i % E.length];
+
+
+    s.style.left =
+      Math.random() * 100 + "vw";
+
+
+    s.style.animationDuration =
+      (3 + Math.random() * 3) + "s";
+
+
+    s.style.animationDelay =
+      (Math.random() * 1.5) + "s";
+
+
+    document.body.appendChild(s);
+
+
+    setTimeout(
+      function(x){
+        x.remove();
+      },
+      8000,
+      s
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   BUTTON ACTIONS
+   ========================================= */
+
+$("start").onclick = function(){
+
+  newGame();
+
+  show("s2");
+
+};
+
+
+$("chestBtn").onclick = function(){
+
+  show("s3");
+
+};
+
+
+$("chest").onclick = function(){
+
+  $("chest").classList.add("hide");
+
+  $("tap").classList.add("hide");
+
+  $("final").classList.remove("hide");
+
+  confetti();
+
+};
+
+
+$("again").onclick = function(){
+
+  newGame();
+
+  show("s1");
+
+};
+
+
+/* =========================================
+   INITIAL LOAD
+   ========================================= */
+
+$("finalMsg").textContent = D.final;
+
+$("sign").textContent =
+  "Forever yours, " +
+  D.from +
+  " 💖";
+
+newGame();
+
+</script>
+
+</body>
+</html>
